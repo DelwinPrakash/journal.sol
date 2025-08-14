@@ -1,13 +1,13 @@
 #![allow(clippy::result_large_err)]
 
 use anchor_lang::prelude::*;
-declare_id!("JAVuBXeBZqXNtS73azhBDAoYaaAFfo4gWXoZe2e7Jf8H");
+declare_id!("H7sTLwAkDhLx21G9NdK6Beimi9jnq73jA3Fc2VwmTsnX");
 
 #[program]
 pub mod crud {
     use super::*;
 
-    pub fn initializeJournal(ctx: Context<CreateJournalEntry>, title: String, content: String) -> Result<()> {
+    pub fn initialize_journal(ctx: Context<CreateJournalEntry>, title: String, content: String) -> Result<()> {
         let journal_entry = &mut ctx.accounts.journal_entry;
 
         journal_entry.owner = ctx.accounts.owner.key();
@@ -17,14 +17,14 @@ pub mod crud {
         Ok(())
     }
 
-    pub fn updateJournalEntry(ctx: Context<UpdateJournalEntry>, content: String, _title: String) -> Result<()>{
+    pub fn update_journal_entry(ctx: Context<UpdateJournalEntry>, content: String, _title: String) -> Result<()>{
         let journal_entry = &mut ctx.accounts.journal_entry;
         journal_entry.content = content;
         
         Ok(())
     }
 
-    pub fn deleteJournalEntry(_ctx: Context<DeleteJournalEntry>, _title: String) -> Result<()>{
+    pub fn delete_journal_entry(_ctx: Context<DeleteJournalEntry>, _title: String) -> Result<()>{
         Ok(())
     }
 }
