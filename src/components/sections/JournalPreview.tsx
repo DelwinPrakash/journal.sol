@@ -38,7 +38,7 @@ export const JournalPreview: React.FC = () => {
         
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-foreground">
-            Your <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-primary">Digital Journal</span>
+            Your <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">Digital Journal</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Write, organize, and secure your thoughts on the blockchain. Every entry is immutably stored and completely under your control.
@@ -51,7 +51,7 @@ export const JournalPreview: React.FC = () => {
             
             <div className="flex justify-between items-center">
               <h3 className="text-2xl font-semibold text-foreground">Recent Entries</h3>
-              <Button className="btn-gradient bg-gradient-to-r from-purple-700 to-purple-600">
+              <Button className="cursor-pointer bg-gradient-to-r from-purple-700 to-purple-600">
                 <Plus className="h-4 w-4 mr-2" />
                 New Entry
               </Button>
@@ -97,9 +97,8 @@ export const JournalPreview: React.FC = () => {
 
           </div>
 
-          {/* Writing Interface Preview */}
           <div className="lg:sticky lg:top-24">
-            <Card className="card-gradient">
+            <Card className="bg-[linear-gradient(135deg,_oklch(0.65_0.27_305_/_0.2),_oklch(0.72_0.27_325_/_0.2))]">
               
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -132,7 +131,7 @@ export const JournalPreview: React.FC = () => {
                     <input type="checkbox" id="public" className="rounded" />
                     <label htmlFor="public" className="text-sm">Make public</label>
                   </div>
-                  <Button className="btn-gradient bg-gradient-to-r from-purple-700 to-purple-600">
+                  <Button className="bg-gradient-to-r from-purple-700 to-purple-600 cursor-pointer">
                     Save to Blockchain
                   </Button>
                 </div>
