@@ -10,6 +10,26 @@ import { cn } from '@/lib/utils';
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  //   const [showNavBar, setShowNavBar] = useState(true);
+  //   const [lastScrollY, setLastScrollY] = useState(0);
+  
+  //   const toggleMenu = () => setIsOpen(!isOpen);
+  //   const controllNavBar = () => {
+  //     if (window.scrollY > lastScrollY) {
+  //       setShowNavBar(false);
+  //     } else {
+  //       setShowNavBar(true);
+  //     }
+  //     setLastScrollY(window.scrollY);
+  //   };
+  
+  //   useEffect(() => {
+  //     window.addEventListener("scroll", controllNavBar);
+  //     return () => {
+  //       window.removeEventListener("scroll", controllNavBar);
+  //     };
+  //   }, [lastScrollY]);
+  
   const navigation = [
     { name: 'Home', href: '#' },
     { name: 'My Journal', href: '#journal' },
@@ -34,7 +54,7 @@ export const Header: React.FC = () => {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
-          <div className="flex items-center space-x-2 z-10">
+          <div className="flex items-center space-x-2 z-20">
             <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-primary-glow">
               <BookOpen className="h-6 w-6 text-primary-foreground" />
             </div>
@@ -76,25 +96,23 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="fixed top-0 left-0 h-dvh w-full flex items justify-center md:hidden backdrop-blur-md">
-            <div className="flex flex-col space-y-8 justify-center items-center">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground/80 hover:text-foreground transition-colors px-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <div className="px-2 pt-2">
-                <CustomWalletButton />
-              </div>
+        <div className={`${mobileMenuOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 fixed top-0 left-0 h-dvh w-full flex items justify-center md:hidden backdrop-blur-md`}>
+          <div className="flex flex-col space-y-8 justify-center items-center">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-foreground/80 hover:text-foreground transition-colors px-2 font-bold"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </a>
+            ))}
+            <div className="px-2 pt-2">
+              <CustomWalletButton />
             </div>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
