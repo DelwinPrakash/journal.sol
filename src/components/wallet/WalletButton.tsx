@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -26,7 +28,7 @@ export const CustomWalletButton: React.FC = () => {
       <Button
         variant="outline"
         onClick={disconnect}
-        className="hover:bg-white/20"
+        className="hover:bg-white/20 text-white"
       >
         <Wallet className="w-4 h-4 mr-2" />
         {formatAddress(publicKey.toString())}
