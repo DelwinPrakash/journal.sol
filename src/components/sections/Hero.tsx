@@ -30,7 +30,7 @@ export const Hero: React.FC = () => {
           
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-foreground">
             Your{' '}
-            <span className="gradient-text text-primary">Blockchain</span>
+            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">Blockchain</span>
             <br />
             Journal Awaits
           </h1>
@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="outline" size="lg" className="btn-glass text-muted-foreground">
+            <Button variant="outline" size="lg" className="text-muted-foreground transition-colors cursor-pointer">
               Store on-chain
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {features.map((feature, index) => (
-            <Card key={index} className="card-gradient card-elevated hover-lift">
+            <Card key={index} className="transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer bg-[linear-gradient(135deg,_oklch(0.65_0.27_305_/_0.2),_oklch(0.72_0.27_325_/_0.2))]">
               <CardContent className="p-8 text-center">
                 <div className="mb-6 mx-auto w-16 h-16 rounded-full bg-gradient-to-r from-primary to-primary-glow flex items-center justify-center">
                   <feature.icon className="h-8 w-8 text-primary-foreground" />
