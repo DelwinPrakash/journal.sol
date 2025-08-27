@@ -3,7 +3,7 @@
 import React from 'react';
 import { BookOpen, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { CustomWalletButton } from '@/components/wallet/WalletButton';
+import CustomWalletButton from '@/components/wallet/CustomWalletButtonWrapper'
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
