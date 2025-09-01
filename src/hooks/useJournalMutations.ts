@@ -1,12 +1,15 @@
+import { useWorkSpace } from "@/lib/anchorClient";
 import { createJournal, deleteJournal, updateJournal } from "@/lib/journal";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export default function useJournalMutations(){
 
+    const { program, wallet } = useWorkSpace();
+
     const createMutation = useMutation({
         mutationKey: ["journalEntry", "create"],
-        mutationFn: ({title, content}: {title: string, content: string}) => createJournal(title, content),
+        mutationFn: ({title, content}: {title: string, content: string}) => createJournal(title, content, program),
         onSuccess: sign => toast.success("Journal created successfully ", sign!),
         onError: error => toast.error(`Error creating journal: ${error.message}`)
     });

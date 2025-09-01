@@ -1,5 +1,5 @@
-import { AnchorProvider, Program } from "@coral-xyz/anchor"
-import { useConnection, useWallet } from "@solana/wallet-adapter-react"
+import { AnchorProvider, Program, setProvider } from "@coral-xyz/anchor"
+import { useAnchorWallet, useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useMemo } from "react";
 import idl from "@/utils/idl/idl.json";
 import type { Crud } from "@/utils/types/crud";
@@ -20,7 +20,7 @@ export const useWorkSpace = () => {
     const program = useMemo(() => {
         if (!provider) return;
 
-        return new Program(idl as Crud, {connection});
+        return new Program<Crud>(idl as Crud, provider);
     }, [provider, PROGRAM_ID]);
 
     return {provider, program, wallet};

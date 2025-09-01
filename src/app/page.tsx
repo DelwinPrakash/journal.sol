@@ -1,5 +1,12 @@
-import { DashboardFeature } from '@/components/dashboard/dashboard-feature'
+import React from 'react';
+import { Hero } from '@/components/sections/Hero';
+import { JournalPreview } from '@/components/sections/JournalPreview';
 
 export default function Home() {
-  return <DashboardFeature />
+  return (
+    <main>
+      <Hero />
+      <JournalPreview />
+    </main>      
+  )
 }
