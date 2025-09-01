@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import CustomWalletButton from '@/components/wallet/CustomWalletButtonWrapper'
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { toast } from 'react-toastify';
+import { WalletButton } from '../wallet/WalletButton';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,10 +33,10 @@ export const Header: React.FC = () => {
   //   }, [lastScrollY]);
   
   const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'My Journal', href: '#journal' },
-    { name: 'Explore', href: '#explore' },
-    { name: 'About', href: '#about' },
+    { name: 'Home', href: '/' },
+    { name: 'My Journal', href: '/journal' },
+    { name: 'Explore', href: '/explore' },
+    // { name: 'About', href: '#about' },
   ];
 
   useEffect(() => {
@@ -77,10 +79,11 @@ export const Header: React.FC = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <CustomWalletButton />
+            {/* <WalletButton/> */}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2 z-20">
+          <div className="md:hidden flex items-center space-x-2 z-50">
             <Button
               variant="ghost"
               size="icon"

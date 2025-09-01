@@ -1,8 +1,13 @@
-import React from 'react';
-import { Calendar, Lock, Eye, Plus } from 'lucide-react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { Calendar, Lock, Eye, Plus, Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import useJournalMutations from '@/hooks/useJournalMutations';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { toast } from 'react-toastify';
 
 export const JournalPreview: React.FC = () => {
   const mockEntries = [
@@ -31,6 +36,31 @@ export const JournalPreview: React.FC = () => {
       tags: ['Philosophy', 'Web3', 'Freedom'],
     },
   ];
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [mounted, setMounted] = useState(false);
+  const { createMutation } = useJournalMutations();
+  const { publicKey } = useWallet();
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  const handleSubmit = () => {
+    if(!publicKey){
+      toast("Please connect your wallet!");
+      return;
+    }
+    if(title.trim() && content.trim()){
+      console.log("Submitting journal entry:", { title, content, publicKey: publicKey.toBase58() });
+      
+      createMutation.mutate({ title, content });
+      
+      setTitle("");
+      setContent("");
+    }
+  }
 
   return (
     <section id="journal" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
@@ -108,31 +138,53 @@ export const JournalPreview: React.FC = () => {
               </CardHeader>
               
               <CardContent className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Title</label>
-                  <input
-                    type="text"
-                    placeholder="What's on your mind today?"
-                    className="w-full p-3 rounded-lg bg-input border border-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2">Content</label>
-                  <textarea
-                    rows={10}
-                    placeholder="Start writing your thoughts..."
-                    className="w-full p-3 rounded-lg bg-input border border-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                  />
-                </div>
+                {mounted && (<>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Title</label>
+                    <input
+                      type="text"
+                      placeholder="What's on your mind today?"
+                      value={title ?? ""}
+                      onChange={e => setTitle(e.target.value)}
+                      className="w-full p-3 rounded-lg bg-input border border-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Content</label>
+                    <textarea
+                      rows={10}
+                      placeholder="Start writing your thoughts..."
+                      value={content}
+                      onChange={e => setContent(e.target.value)}
+                      className="w-full p-3 rounded-lg bg-input border border-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      />
+                  </div>
+                </>)}
                 
                 <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <input type="checkbox" id="public" className="rounded" />
-                    <label htmlFor="public" className="text-sm">Make public</label>
-                  </div>
-                  <Button className="bg-gradient-to-r from-purple-700 to-purple-600 cursor-pointer">
-                    Save to Blockchain
+                  {mounted && 
+                    <div className="flex items-center gap-2">
+                      <input type="checkbox" id="public" className="rounded" />
+                      <label htmlFor="public" className="text-sm">Make public</label>
+                    </div>
+                  }
+                  <Button onClick={handleSubmit} className={` bg-gradient-to-r from-purple-700 to-purple-600 cursor-pointer`} disabled={!title.trim() || !content.trim() || createMutation.isPending}>
+                    {createMutation.isPending ? (
+                      <>
+                        <svg
+                          className="animate-spin text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <Loader className="h-4 w-4 mr-2" />
+                        </svg>
+                        Saving...
+                      </>
+                    ) : (
+                      'Save to Blockchain'
+                    )}
                   </Button>
                 </div>
 
