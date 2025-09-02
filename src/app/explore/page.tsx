@@ -10,13 +10,15 @@ export default function ExplorePage() {
     const { wallet } = useWorkSpace();
 
     return (
-        <div className="pt-20 min-h-screen flex flex-col bg-background p-3">
+        <div className="pt-20 min-h-screen flex flex-col bg-background p-4">
             <h1 className="text-center text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">Explore Journals</h1>
             {!wallet?.publicKey ? (
-                <p className="text-center text-muted-foreground">Please connect your wallet to view public journals.</p>
+                <div className="flex-1 pb-20 flex items-center justify-center">
+                    <p className="text-center text-muted-foreground">Please connect your wallet to view public journals.</p>
+                </div>
             ) : (
                 getAllJournals.isPending ? (
-                    <div className="flex flex-col items-center justify-center space-y-4">
+                    <div className="flex flex-1 flex-col items-center justify-center space-y-4">
                         <Loader className="h-8 w-8 animate-spin text-muted-foreground" />
                         <p className="text-sm text-muted-foreground">Loading...</p>
                     </div>
