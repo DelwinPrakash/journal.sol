@@ -11,26 +11,6 @@ import { WalletButton } from '../wallet/WalletButton';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  //   const [showNavBar, setShowNavBar] = useState(true);
-  //   const [lastScrollY, setLastScrollY] = useState(0);
-  
-  //   const toggleMenu = () => setIsOpen(!isOpen);
-  //   const controllNavBar = () => {
-  //     if (window.scrollY > lastScrollY) {
-  //       setShowNavBar(false);
-  //     } else {
-  //       setShowNavBar(true);
-  //     }
-  //     setLastScrollY(window.scrollY);
-  //   };
-  
-  //   useEffect(() => {
-  //     window.addEventListener("scroll", controllNavBar);
-  //     return () => {
-  //       window.removeEventListener("scroll", controllNavBar);
-  //     };
-  //   }, [lastScrollY]);
   
   const navigation = [
     { name: 'Home', href: '/' },
@@ -53,7 +33,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 w-full z-10">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           <div className="flex items-center space-x-2 z-20">
@@ -79,7 +59,6 @@ export const Header: React.FC = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <CustomWalletButton />
-            {/* <WalletButton/> */}
           </div>
 
           {/* Mobile menu button */}

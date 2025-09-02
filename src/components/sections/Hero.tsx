@@ -41,10 +41,13 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="outline" size="lg" className="text-muted-foreground transition-colors cursor-pointer">
-              Store on-chain
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <a href={"#journal"}>
+              <Button variant="outline" size="lg" className="text-muted-foreground transition-colors cursor-pointer">
+                Store on-chain
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+
+            </a>
           </div>
 
         </div>
