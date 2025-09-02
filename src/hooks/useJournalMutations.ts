@@ -16,14 +16,14 @@ export default function useJournalMutations(){
 
     const updateMutation = useMutation({
         mutationKey: ["journalEntry", "update"],
-        mutationFn: ({title, content}: {title: string, content: string}) => updateJournal(title, content),
+        mutationFn: ({title, content}: {title: string, content: string}) => updateJournal(title, content, program, wallet),
         onSuccess: sign => toast.success("Journal updated successfully ", sign!),
         onError: error => toast.error(`Error updating journal: ${error.message}`)
     })
 
     const deleteMutation = useMutation({
         mutationKey: ["journalEntry", "delete"],
-        mutationFn: ({title}: {title: string}) => deleteJournal(title),
+        mutationFn: ({title}: {title: string}) => deleteJournal(title, program, wallet),
         onSuccess: sign => toast.success("Journal deleted successfully ", sign!),
         onError: error => toast.error(`Error deleting journal: ${error.message}`)
     })
