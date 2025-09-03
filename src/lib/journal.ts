@@ -14,30 +14,29 @@ export async function   createJournal(title: string, content: string, program: a
     await program?.methods.initializeJournal(title, content).rpc();
 }
 
-export async function updateJournal(title: string, content: string){
-    const { program, wallet } = useWorkSpace();
+export async function updateJournal(title: string, content: string, program: any, wallet: any){
     const [journalPDA] = getJournalPDA(title, wallet.publicKey!);
+    console.log("Computed PDA:", journalPDA.toBase58());
 
     await program?.methods
         .updateJournalEntry(content, title)
         .accounts({
-            // journalEntry: journalPDA,
+            journalEntry: journalPDA,
             owner: wallet.publicKey!,
-            // systemProgram: SystemProgram.programId
+            systemProgram: SystemProgram.programId
         })
         .rpc();
 }
 
-export async function deleteJournal(title: string){
-    const { program, wallet } = useWorkSpace();
+export async function deleteJournal(title: string, program: any, wallet: any){
     const [journalPDA] = getJournalPDA(title, wallet.publicKey!);
 
     await program?.methods
         .deleteJournalEntry(title)
         .accounts({
-            // journalEntry: journalPDA,
+            journalEntry: journalPDA,
             owner: wallet.publicKey!,
-            // systemProgram: SystemProgram.programId
+            systemProgram: SystemProgram.programId
         })
         .rpc();
 }
