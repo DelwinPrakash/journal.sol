@@ -12,7 +12,7 @@ crud = "H7sTLwAkDhLx21G9NdK6Beimi9jnq73jA3Fc2VwmTsnX"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

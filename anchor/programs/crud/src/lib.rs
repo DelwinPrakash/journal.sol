@@ -48,13 +48,13 @@ pub struct CreateJournalEntry<'info>{
 }
 
 #[derive(Accounts)]
-#[instruction(title: String)]
+#[instruction(title: String, content: String)]
 pub struct UpdateJournalEntry<'info> {
     #[account(
         mut,
         seeds = [title.as_bytes(), owner.key().as_ref()],
         bump,
-        realloc = 8 + JournalEntry::INIT_SPACE,
+        realloc = 8 + 32 + 4 + title.len() + 4 + content.len(),
         realloc::payer = owner,
         realloc::zero = true,
     )]
