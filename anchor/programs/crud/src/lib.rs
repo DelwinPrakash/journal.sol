@@ -10,23 +10,23 @@ pub mod crud {
     pub fn initialize_journal(ctx: Context<CreateJournalEntry>, title: String, content: String, is_public: bool) -> Result<()> {
         let journal_entry = &mut ctx.accounts.journal_entry;
 
-        let time = Clock::get();
+        let time = Clock::get()?;
 
         journal_entry.owner = ctx.accounts.owner.key();
         journal_entry.title = title;
         journal_entry.content = content;
         journal_entry.is_public = is_public;
-        journal_entry.created_at = time.unwrap().unix_timestamp;
+        journal_entry.created_at = time.unix_timestamp;
         
         Ok(())
     }
 
     pub fn update_journal_entry(ctx: Context<UpdateJournalEntry>, _title: String, content: String) -> Result<()>{
         let journal_entry = &mut ctx.accounts.journal_entry;
-        let time = Clock::get();
+        let time = Clock::get()?;
         
         journal_entry.content = content;
-        journal_entry.created_at = time.unwrap().unix_timestamp;
+        journal_entry.created_at = time.unix_timestamp;
         
         Ok(())
     }
@@ -61,7 +61,7 @@ pub struct UpdateJournalEntry<'info> {
         mut,
         seeds = [title.as_bytes(), owner.key().as_ref()],
         bump,
-        realloc = 8 + JournalEntry::INIT_SPACE,
+        realloc = 8 + 32 + 4 + title.len() + 4 + content.len(),
         realloc::payer = owner,
         realloc::zero = true,
     )]

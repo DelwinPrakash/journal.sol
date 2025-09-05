@@ -10,7 +10,7 @@ export default function useJournalMutations(){
 
     const createMutation = useMutation({
         mutationKey: ["journalEntry", "create"],
-        mutationFn: ({title, content}: {title: string, content: string}) => createJournal(title, content, program),
+        mutationFn: ({title, content, isPublic}: {title: string, content: string, isPublic: boolean}) => createJournal(title, content, isPublic, program),
         onSuccess: sign => toast.success("Journal created successfully ", sign!),
         onError: error => toast.error(`Error creating journal: ${error.message}`)
     });

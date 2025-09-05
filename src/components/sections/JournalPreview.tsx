@@ -39,6 +39,7 @@ export const JournalPreview: React.FC = () => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [isPublic, setIsPublic] = useState(true);
   const [mounted, setMounted] = useState(false);
   const { createMutation } = useJournalMutations();
   const { publicKey } = useWallet();
@@ -53,9 +54,9 @@ export const JournalPreview: React.FC = () => {
       return;
     }
     if(title.trim() && content.trim()){
-      console.log("Submitting journal entry:", { title, content, publicKey: publicKey.toBase58() });
+      console.log("Submitting journal entry:", { title, content, publicKey: publicKey.toBase58(), isPublic });
       
-      createMutation.mutate({ title, content });
+      createMutation.mutate({ title, content, isPublic });
       
       setTitle("");
       setContent("");
@@ -165,7 +166,7 @@ export const JournalPreview: React.FC = () => {
                 <div className="flex justify-between items-center">
                   {mounted && 
                     <div className="flex items-center gap-2">
-                      <input type="checkbox" id="public" className="rounded" />
+                      <input type="checkbox" id="public" className="rounded" defaultChecked onClick={() => setIsPublic(!isPublic)}/>
                       <label htmlFor="public" className="text-sm">Make public</label>
                     </div>
                   }

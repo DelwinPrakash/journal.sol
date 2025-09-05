@@ -8,8 +8,8 @@ function getJournalPDA(title: string, owner: PublicKey){
     );
 }
 
-export async function   createJournal(title: string, content: string, program: any) {
-    await program?.methods.initializeJournal(title, content).rpc();
+export async function   createJournal(title: string, content: string, isPublic: boolean, program: any) {
+    await program?.methods.initializeJournal(title, content, isPublic).rpc();
 }
 
 export async function updateJournal(title: string, content: string, program: any, wallet: any){
