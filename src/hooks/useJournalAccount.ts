@@ -1,5 +1,4 @@
 import { useWorkSpace } from "@/lib/anchorClient";
-import { PublicKey } from "@solana/web3.js";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useJournalAccount(){

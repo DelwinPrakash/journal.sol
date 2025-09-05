@@ -21,20 +21,19 @@ export default function MyJournalPage() {
     const { getUserJournals, getAllJournals } = useJournalAccount();
     const { wallet } = useWorkSpace();
     const { updateMutation, deleteMutation } = useJournalMutations();
-    // const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const [editContent, setEditContent] = useState<string>("");
     const [editTitle, setEditTitle] = useState<string>("");
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-    const handleUpdate = (title: string, content: string) => {
-        console.log(title, content);
-        updateMutation.mutateAsync({ title, content });
+    const handleUpdate = async (title: string, content: string) => {
+        await updateMutation.mutateAsync({ title, content });
+        setIsEditDialogOpen(false);
     }
 
-    const handleDelete = (title: string) => {
-        console.log(title);
-        deleteMutation.mutateAsync({ title });
+    const handleDelete = async (title: string) => {
+        await deleteMutation.mutateAsync({ title });
+        setIsDeleteDialogOpen(false);
     }
 
     return (
@@ -70,7 +69,6 @@ export default function MyJournalPage() {
                                                     className="w-[10%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
                                                     onClick={() => {
                                                         setIsEditDialogOpen(true);
-                                                        // setEditingIndex(index);
                                                         setEditContent(entry.account.content);
                                                         setEditTitle(entry.account.title);
                                                     }}
@@ -94,7 +92,6 @@ export default function MyJournalPage() {
                                                 <div className="flex justify-end space-x-2 mt-4">
                                                     <Button className="text-muted-foreground cursor-pointer hover:bg-red-500" variant="outline"
                                                         onClick={() => {
-                                                            // setEditingIndex(null)
                                                             setIsEditDialogOpen(false);
                                                         }}>
                                                         Cancel
@@ -102,11 +99,10 @@ export default function MyJournalPage() {
                                                     <Button
                                                         className="cursor-pointer"
                                                         onClick={() => {
-                                                            // setEditingIndex(null);
                                                             handleUpdate(editTitle, editContent);
                                                         }}
                                                     >
-                                                        Save
+                                                        {updateMutation.isPending ? <Loader className="h-4 w-4 animate-spin" /> : "Save"}
                                                     </Button>
                                                 </div>
                                             </DialogContent>
@@ -118,7 +114,6 @@ export default function MyJournalPage() {
                                                     className="w-[10%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-110"
                                                     onClick={() => {
                                                         setIsDeleteDialogOpen(true);
-                                                        // setEditingIndex(index);
                                                         setEditContent(entry.account.content);
                                                         setEditTitle(entry.account.title);
                                                     }}
@@ -150,7 +145,6 @@ export default function MyJournalPage() {
                                                 <div className="flex justify-end space-x-2 mt-4">
                                                     <Button className="text-muted-foreground cursor-pointer hover:bg-gray-900" variant="outline"
                                                         onClick={() => {
-                                                            // setEditingIndex(null)
                                                             setIsDeleteDialogOpen(false);
                                                         }}>
                                                         Cancel
@@ -158,11 +152,10 @@ export default function MyJournalPage() {
                                                     <Button
                                                         className="cursor-pointer bg-red-500 hover:bg-red-600"
                                                         onClick={() => {
-                                                            // setEditingIndex(null);
                                                             handleDelete(editTitle);
                                                         }}
                                                     >
-                                                        Delete
+                                                        {deleteMutation.isPending ? <Loader className="h-4 w-4 animate-spin" /> : "Delete"}
                                                     </Button>
                                                 </div>
                                             </DialogContent>
