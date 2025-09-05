@@ -144,11 +144,11 @@
       ],
       "args": [
         {
-          "name": "content",
+          "name": "title",
           "type": "string"
         },
         {
-          "name": "_title",
+          "name": "content",
           "type": "string"
         }
       ]

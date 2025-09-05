@@ -150,11 +150,11 @@ export type Crud = {
       ],
       "args": [
         {
-          "name": "content",
+          "name": "title",
           "type": "string"
         },
         {
-          "name": "title",
+          "name": "content",
           "type": "string"
         }
       ]

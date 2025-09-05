@@ -17,7 +17,7 @@ pub mod crud {
         Ok(())
     }
 
-    pub fn update_journal_entry(ctx: Context<UpdateJournalEntry>, content: String, _title: String) -> Result<()>{
+    pub fn update_journal_entry(ctx: Context<UpdateJournalEntry>, _title: String, content: String) -> Result<()>{
         let journal_entry = &mut ctx.accounts.journal_entry;
         journal_entry.content = content;
         
