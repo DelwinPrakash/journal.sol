@@ -106,6 +106,10 @@ export type Crud = {
         {
           "name": "content",
           "type": "string"
+        },
+        {
+          "name": "isPublic",
+          "type": "bool"
         }
       ]
     },
@@ -192,6 +196,14 @@ export type Crud = {
           {
             "name": "content",
             "type": "string"
+          },
+          {
+            "name": "isPublic",
+            "type": "bool"
+          },
+          {
+            "name": "createdAt",
+            "type": "i64"
           }
         ]
       }
