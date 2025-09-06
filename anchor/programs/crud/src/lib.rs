@@ -1,7 +1,7 @@
 #![allow(clippy::result_large_err)]
 
 use anchor_lang::prelude::*;
-declare_id!("H7sTLwAkDhLx21G9NdK6Beimi9jnq73jA3Fc2VwmTsnX");
+declare_id!("52ovqTJWXdA8mjL3dKtMvBkctgsZav4yLjAREe64xk4g");
 
 #[program]
 pub mod crud {
@@ -61,7 +61,7 @@ pub struct UpdateJournalEntry<'info> {
         mut,
         seeds = [title.as_bytes(), owner.key().as_ref()],
         bump,
-        realloc = 8 + 32 + 4 + title.len() + 4 + content.len(),
+        realloc = 8 + JournalEntry::INIT_SPACE,
         realloc::payer = owner,
         realloc::zero = true,
     )]
