@@ -11,15 +11,15 @@ export default function useJournalAccount(){
     });
 
     const getUserJournals = useQuery({
-            queryKey: ["journal", "user"],
-            queryFn: () => program?.account.journalEntry.all([{
-                memcmp:{
-                    offset: 8,
-                    bytes: wallet?.publicKey?.toBase58()!
-                }
-            }]),
-            enabled: !!program && !!wallet?.publicKey
-        });
+        queryKey: ["journal", "user"],
+        queryFn: () => program?.account.journalEntry.all([{
+            memcmp:{
+                offset: 8,
+                bytes: wallet?.publicKey?.toBase58()!
+            }
+        }]),
+        enabled: !!program && !!wallet?.publicKey
+    });
 
     return {
         getAllJournals,

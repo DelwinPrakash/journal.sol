@@ -1,5 +1,5 @@
-import { AnchorProvider, Program, setProvider } from "@coral-xyz/anchor"
-import { useAnchorWallet, useConnection, useWallet } from "@solana/wallet-adapter-react"
+import { AnchorProvider, Program } from "@coral-xyz/anchor"
+import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useMemo } from "react";
 import idl from "@/utils/idl/idl.json";
 import type { Crud } from "@/utils/types/crud";
