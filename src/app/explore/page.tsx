@@ -8,7 +8,7 @@ import { Calendar, Loader } from "lucide-react";
 export default function ExplorePage() {
     const { getAllJournals } = useJournalAccount();
     const { wallet } = useWorkSpace();
-    
+
     return (
         <div className="pt-20 min-h-screen flex flex-col bg-background p-4">
             <h1 className="text-center text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">Explore Journals</h1>
