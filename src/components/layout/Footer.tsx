@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-border/50 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center"> 
           <p className="text-muted-foreground text-sm">
-            &copy; 2024 Journal.sol. All rights reserved.
+            &copy; 2025 Journal.sol. All rights reserved.
           </p>
 
           <p className="text-muted-foreground text-sm mt-4 sm:mt-0">
