@@ -44,5 +44,4 @@ export default function useJournalMutations(){
         updateMutation,
         deleteMutation
     }
-
 }
