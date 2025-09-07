@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useJournalAccount from "@/hooks/useJournalAccount";
 import { useWorkSpace } from "@/lib/anchorClient";
 import { Calendar, Loader } from "lucide-react";
+import Link from "next/link"
 
 export default function ExplorePage() {
     const { getAllJournals } = useJournalAccount();
@@ -24,7 +25,7 @@ export default function ExplorePage() {
                     </div>
                 ) : (getAllJournals!.data!.length === 0) ? (
                     <div className="flex-1 pb-20 flex items-center justify-center">
-                        <p className="text-center text-muted-foreground">No journals found. Start by creating a new <a className="underline hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent p-1 italic" href="/">journal entry!</a></p>
+                        <p className="text-center text-muted-foreground">No journals found. Start by creating a new <Link className="underline hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent p-1 italic" href="/">journal entry!</Link></p>
                     </div>
                 ) : (
                     <div className="grid md:grid-cols-3 gap-8">

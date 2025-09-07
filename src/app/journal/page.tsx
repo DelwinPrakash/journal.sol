@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import useJournalMutations from "@/hooks/useJournalMutations";
+import Link from "next/link";
 
 export default function MyJournalPage() {
     const { getUserJournals } = useJournalAccount();
@@ -50,7 +51,7 @@ export default function MyJournalPage() {
                     </div>
                 ) : (getUserJournals!.data!.length === 0) ? (
                     <div className="flex-1 pb-20 flex items-center justify-center">
-                        <p className="text-center text-muted-foreground">No journals found. Start by creating a new <a className="underline hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent p-1 italic" href="/">journal entry!</a></p>
+                        <p className="text-center text-muted-foreground">No journals found. Start by creating a new <Link className="underline hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent p-1 italic" href="/">journal entry!</Link></p>
                     </div>
                 ) : (
                     <div className="grid md:grid-cols-3 gap-8">
