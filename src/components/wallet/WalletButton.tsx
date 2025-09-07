@@ -7,8 +7,6 @@ import { Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const WalletButton: React.FC = () => {
-  const { connected, publicKey } = useWallet();
-
   return (
     <div className="wallet-adapter-button-wrapper">
       <WalletMultiButton className="!bg-gradient-to-r !from-primary !to-primary-glow !text-primary-foreground !border-0 !rounded-lg !px-4 !py-2 !font-medium !transition-all !duration-300 hover:!shadow-lg hover:!scale-105" />

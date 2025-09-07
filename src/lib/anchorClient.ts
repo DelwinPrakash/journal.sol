@@ -3,7 +3,6 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useMemo } from "react";
 import idl from "@/utils/idl/idl.json";
 import type { Crud } from "@/utils/types/crud";
-import { PROGRAM_ID } from "@/utils/constants";
 import { Connection } from "@solana/web3.js";
 
 export const useWorkSpace = () => {
@@ -21,7 +20,7 @@ export const useWorkSpace = () => {
         if (!provider) return;
 
         return new Program<Crud>(idl as Crud, provider);
-    }, [provider, PROGRAM_ID]);
+    }, [provider]);
 
     return {provider, program, wallet};
 }

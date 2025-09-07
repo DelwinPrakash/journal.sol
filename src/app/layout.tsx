@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Header />
             {children}
             <Footer />
-            <ToastContainer/>
+            <ToastContainer theme='dark'/>
           </div>
         </Providers>
       </body>
