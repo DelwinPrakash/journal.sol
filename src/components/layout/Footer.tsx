@@ -26,6 +26,10 @@ export const Footer: React.FC = () => {
             &copy; 2025 Journal.sol. All rights reserved.
           </p>
 
+          <a href="https://github.com/DelwinPrakash/journal.sol" className="text-muted-foreground text-sm mt-4 sm:mt-0">
+            GitHub - journal.sol
+          </a>
+
           <p className="text-muted-foreground text-sm mt-4 sm:mt-0">
             Built on Solana • Powered by Web3
           </p>
