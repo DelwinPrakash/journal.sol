@@ -1,4 +1,4 @@
-import { AnchorProvider, Program } from "@coral-xyz/anchor"
+import { AnchorProvider, Program, Wallet } from "@coral-xyz/anchor"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { useMemo } from "react";
 import idl from "@/utils/idl/idl.json";
@@ -12,9 +12,8 @@ export const useWorkSpace = () => {
     const provider = useMemo(() => {
         if(!wallet || !wallet.publicKey) return;
 
-        return new AnchorProvider(connection as Connection, wallet as any, { commitment: "processed", preflightCommitment: "processed"})
+        return new AnchorProvider(connection as Connection, wallet as unknown as Wallet, { commitment: "processed", preflightCommitment: "processed"})
     }, [connection, wallet]);
-
 
     const program = useMemo(() => {
         if (!provider) return;

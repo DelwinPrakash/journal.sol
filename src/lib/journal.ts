@@ -1,6 +1,7 @@
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { PROGRAM_ID } from "@/utils/constants";
 import { WalletContextState } from "@solana/wallet-adapter-react";
+import { Program } from "@coral-xyz/anchor";
 
 function getJournalPDA(title: string, owner: PublicKey){
     return PublicKey.findProgramAddressSync(
@@ -9,11 +10,11 @@ function getJournalPDA(title: string, owner: PublicKey){
     );
 }
 
-export async function   createJournal(title: string, content: string, isPublic: boolean, program: any) {
+export async function createJournal(title: string, content: string, isPublic: boolean, program: Program) {
     await program?.methods.initializeJournal(title, content, isPublic).rpc();
 }
 
-export async function updateJournal(title: string, content: string, program: any, wallet: WalletContextState){
+export async function updateJournal(title: string, content: string, program: Program , wallet: WalletContextState){
     const [journalPDA] = getJournalPDA(title, wallet.publicKey!);
 
     await program?.methods
@@ -26,7 +27,7 @@ export async function updateJournal(title: string, content: string, program: any
         .rpc();
 }
 
-export async function deleteJournal(title: string, program: any, wallet: WalletContextState){
+export async function deleteJournal(title: string, program: Program, wallet: WalletContextState){
     const [journalPDA] = getJournalPDA(title, wallet.publicKey!);
 
     await program?.methods

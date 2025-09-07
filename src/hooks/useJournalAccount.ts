@@ -20,10 +20,11 @@ export default function useJournalAccount(){
     const getUserJournals = useQuery({
         queryKey: ["journal", "user"],
         queryFn: async () => {
+            if (!wallet.publicKey) return [];
             const userJournal = await program?.account.journalEntry.all([{
                 memcmp:{
                     offset: 8,
-                    bytes: wallet?.publicKey?.toBase58()!
+                    bytes: wallet?.publicKey?.toBase58()
                 }
             }]);
             return userJournal?.sort((a, b) => b.account.createdAt.cmp(a.account.createdAt));

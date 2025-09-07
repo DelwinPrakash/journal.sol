@@ -54,8 +54,6 @@ export const JournalPreview: React.FC = () => {
       return;
     }
     if(title.trim() && content.trim()){
-      console.log("Submitting journal entry:", { title, content, publicKey: publicKey.toBase58(), isPublic });
-      
       createMutation.mutate({ title, content, isPublic });
       
       setTitle("");

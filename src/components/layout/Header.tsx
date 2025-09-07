@@ -5,9 +5,13 @@ import { BookOpen, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CustomWalletButton from '@/components/wallet/CustomWalletButtonWrapper'
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const location = usePathname();
   
   const navigation = [
     { name: 'Home', href: '/' },
@@ -33,25 +37,25 @@ export const Header: React.FC = () => {
       <nav className="mx-auto px-4 sm:px-6 lg:px-8 backdrop-blur-md">
         <div className="flex justify-between items-center h-16">
           
-          <a href="/" className="cursor-pointer z-20">
+          <Link href="/" className="cursor-pointer z-20">
             <div className="flex items-center space-x-2">
               <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-primary-glow">
                 <BookOpen className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold gradient-text text-foreground">Journal.sol</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent italic"
+                className={`${location === item.href && "text-white"} text-foreground/80 hover:bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text hover:text-transparent italic`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -78,14 +82,14 @@ export const Header: React.FC = () => {
       {/* Mobile Navigation */}
       <div className={`${mobileMenuOpen ? "translate-x-0" : "translate-x-full"} transition-transform duration-300 fixed top-0 left-0 h-dvh w-full flex flex-col md:hidden backdrop-blur-md z-50`}>
         <div className="px-4 sm:px-6 lg:px-8 flex justify-between items-center h-18">            
-          <a href="/" className="cursor-pointer z-20">
+          <Link href="/" className="cursor-pointer z-20">
             <div className="flex items-center space-x-2">
               <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-primary-glow">
                 <BookOpen className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold gradient-text text-foreground">Journal.sol</span>
             </div>
-          </a>
+          </Link>
 
           <div className="md:hidden flex items-center space-x-2 z-20">
             <Button
@@ -102,14 +106,14 @@ export const Header: React.FC = () => {
 
         <div className="flex flex-col space-y-8 justify-center items-center h-dvh">
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
-              className="text-foreground/80 hover:text-foreground transition-colors px-2 font-bold"
+              className={`${location === item.href && "text-white"} text-foreground/80 hover:text-foreground transition-colors px-2 font-bold`}
               onClick={() => setMobileMenuOpen(false)}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
           <div className="px-2 pt-2">
             <CustomWalletButton />
