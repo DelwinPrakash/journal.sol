@@ -5,19 +5,29 @@ import { toast } from "react-toastify";
 
 export default function useJournalMutations(){
 
-    const { program, wallet } = useWorkSpace();
+    const { program } = useWorkSpace();
     const queryClient = useQueryClient();
 
     const createMutation = useMutation({
         mutationKey: ["journalEntry", "create"],
-        mutationFn: ({title, content, isPublic}: {title: string, content: string, isPublic: boolean}) => createJournal(title, content, isPublic, program),
+        mutationFn: ({title, content, isPublic}: {title: string, content: string, isPublic: boolean}) => {
+            if(!program){
+                throw new Error("Program not initialized!");
+            }
+            return createJournal(title, content, isPublic, program);
+        },
         onSuccess: sign => toast.success("Journal created successfully ", sign!),
         onError: error => toast.error(`Error creating journal: ${error.message}`)
     });
 
     const updateMutation = useMutation({
         mutationKey: ["journalEntry", "update"],
-        mutationFn: ({title, content}: {title: string, content: string}) => updateJournal(title, content, program, wallet),
+        mutationFn: ({title, content}: {title: string, content: string}) => {
+            if(!program){
+                throw new Error("Program not initialized!");
+            }
+            return updateJournal(title, content, program);
+        },
         onSuccess: sign => {
             toast.success("Journal updated successfully ", sign!);
             queryClient.invalidateQueries({
@@ -29,7 +39,12 @@ export default function useJournalMutations(){
 
     const deleteMutation = useMutation({
         mutationKey: ["journalEntry", "delete"],
-        mutationFn: ({title}: {title: string}) => deleteJournal(title, program, wallet),
+        mutationFn: ({title}: {title: string}) => {
+            if(!program){
+                throw new Error("Program not initialized!");
+            }
+            return deleteJournal(title, program);
+        },
         onSuccess: sign => {
             toast.success("Journal deleted successfully ", sign!);
             queryClient.invalidateQueries({
