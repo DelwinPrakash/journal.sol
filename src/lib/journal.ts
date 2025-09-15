@@ -1,4 +1,3 @@
-import { WalletContextState } from "@solana/wallet-adapter-react";
 import { Program } from "@coral-xyz/anchor";
 import type { Crud } from "@/utils/types/crud";
 
